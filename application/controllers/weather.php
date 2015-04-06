@@ -2,7 +2,10 @@
 class Weather extends CI_Controller { 
 	public function index()
 	{
-		$this->load->view('weather');
+		$data['title'] = "Weather Conditions";
+		$this->load->library('networking');
+		$this->load->view('header', $data);
+		$this->load->view('weather/main');
 	}
 }
 ?>

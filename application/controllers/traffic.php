@@ -1,6 +1,5 @@
 <?php
 class Traffic extends CI_Controller {
-
 	/**
 	 * Index Page for this controller.
 	 *
@@ -18,7 +17,10 @@ class Traffic extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('traffic');
+		$data['title'] = "Weather Conditions";
+		$this->load->library('networking');
+		$this->load->view('header', $data);
+		$this->load->view('traffic/main');
 	}
 }
 ?>
