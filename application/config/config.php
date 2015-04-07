@@ -1,6 +1,14 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['zip_code'] = '60005';
+$config['wunderground_api'] = '0c6c88a109e2f493';
+
+/*$db['hostname'] = 'localhost';
+$db['db_user'] = 'dashome';
+$db['db_pass'] = 'dashome';
+$db['db_name'] = 'dashome';
+$this->load->database($db);
+*/
 /*
 |--------------------------------------------------------------------------
 | Base Site URL

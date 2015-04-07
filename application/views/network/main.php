@@ -1,33 +1,45 @@
-<div class="container">
+<?php 
+$list = $this->db->query("SELECT * FROM hosts");
 
+
+?>
+<div class="container">
   <div class="page-header">
     <h1 class="text-center">Network Information</h1>
   </div>
-  <a href="ping">Ping address</a>
-  <a href="arping">Arping address</a>
-  <a href="routing">Routing Table</a>
-  <a href="arp">ARP</a>
+<form action="http://10.0.1.3/dashome/index.php/wol/wakeup" method="post">
   <div class="row">
-            <div class="col-md-6" id="current_conditions">
-              <!--<hr>-->
-              <div id='status-icon'></div>
-              <small id='status'></small>
-            </div>
-            <div class="col-md-6" id="map"></div>
-  </div>  
-  <div class="row">
-     <div class="col-md-6">
+     <div class="col-md-8">
         <table class="table">
           <thead>
             <tr>
-              <th></th>
-              <th></th>
-            </tr>
+              <th>Host</th>
+              <th>MAC</th>
+              <th>IP</th>
+              <th>WOL</th>
           </thead>
-          <tbody id="forecast-table"></tbody>
+          <tbody id="host-table">
+            <?php foreach($list->result() as $host) { ?>
+              <tr>
+                <td><?php echo $host->hostname; ?></td>
+                <td><pre><a href="http://10.0.1.3/dashome/index.php/wol/wakeup/<?php echo $host->mac; ?>"><?php echo $host->mac; ?></pre></td>
+                <td><pre><a href="ping/<?php echo $host->ip;?>"><?php echo $host->ip; ?></a></pre></td>
+                <td><input type="checkbox" name="wol_list[]" value="<?php echo $host->mac; ?>"></td>
+              </tr>
+            <?php } ?>
+          </tbody>
         </table>
+        <input type="submit">
       </div>
-      <div class="col-md-6"></div>
+  <div class="col-md-4">
+  <ul>
+  <li><a href="ping">Ping address</a></li>
+  <li><a href="arping">Arping address</a></li>
+  <li><a href="routing">Routing Table</a></li>
+  <li><a href="arp">ARP</a></li>
+  </ul>
   </div>
+  </div> 
+  
 </div>
 </body>

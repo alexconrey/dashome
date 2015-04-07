@@ -30,9 +30,10 @@
 
 <script>
 var zip = <?php echo $this->config->item('zip_code'); ?>;
+var apicode = '<?php echo $this->config->item('wunderground_api'); ?>';
 $(document).ready(function($) {
   $.ajax({
-  url : "http://api.wunderground.com/api/0c6c88a109e2f493/geolookup/conditions/q/" + zip + ".json",
+  url : "http://api.wunderground.com/api/" + apicode + "/geolookup/conditions/q/" + zip + ".json",
   dataType : "jsonp",
   success : function(parsed_json) {
     var location = parsed_json['current_observation']['display_location']['city'];
@@ -42,9 +43,11 @@ $(document).ready(function($) {
     var feelslike = parsed_json['current_observation']['feelslike_string'];
     var lastupdated = parsed_json['current_observation']['observation_time'];
     $("#current_conditions").prepend("<h2>Currently in " + location + ": " + temp_f + "F</h2>");
-    $("#map").html("<img src='http://api.wunderground.com/api/0c6c88a109e2f493/animatedradar/q/" + zip + ".gif?timelabel=1&timelabel.y=10&num=5&delay=50'>");
+    $("#map").html("<img src='http://api.wunderground.com/api/" + apicode + "/animatedradar/q/" + zip + ".gif?newmaps=1&timelabel=1&timelabel.y=10&num=5&delay=50'>");
     $("#status").append(status);
     $("#status-icon").html("<img src='" + statusicon + "'>");
+    var colorfl = "test";
+
     $("#forecast-table").append("<tr><td>Feels like</td><td>" + feelslike + "</td></tr>");
     $("#forecast-table").append("<tr><td>Last Updated</td><td>" + lastupdated + "</td></tr>");
     //alert("Current temperature in " + location + " is: " + temp_f);

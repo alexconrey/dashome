@@ -5,7 +5,11 @@ class WOL extends CI_Controller {
 	public function index()
 	{	
 		$this->load->database();
-		$query = "SELECT * FROM network";
+		$this->load->library('networking');
+
+		$this->load->view('header');
+
+		$query = "SELECT * FROM hosts";
 
 		$result = $this->db->query($query);
 		$data = array();
@@ -27,6 +31,26 @@ class WOL extends CI_Controller {
 		$this->db->query($query);
 
 		$this->index();
+	}
+	public function wakeup($mac = null)
+	{
+		if(isset($_POST['wol_list']))
+		{
+			foreach($_POST['wol_list'] as $macaddr)
+			{
+				$rtn = "<pre>";
+				$output = shell_exec('wakeonlan '.$macaddr);
+				$rtn .= $output;
+				$rtn .= "</pre>";
+			}
+		} else {
+		 	$rtn = "<pre>";
+			$output = shell_exec('wakeonlan '.$mac);
+			$rtn .= $output;
+			$rtn .= "</pre>";
+		}
+
+		return $rtn;
 	}
 }
 ?>

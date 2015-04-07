@@ -50,7 +50,7 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'dashome';
-$db['default']['password'] = 'passw0rd';
+$db['default']['password'] = 'dashome';
 $db['default']['database'] = 'dashome';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';

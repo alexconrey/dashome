@@ -48,14 +48,14 @@ class Networking {
 		}
 	public function ping($dstIP) {
 		$rtn = "<pre>";
-		$output = shell_exec('ping -c 3 '.$dstIP);
+		$output = shell_exec('ping -c 3 -t 15 '.$dstIP);
 		$rtn .= $output;
 		$rtn .= "</pre>";
 		return $rtn;
 	}
-	public function arping($dstIP) {
+	public function arping($dstMAC) {
 		$rtn = "<pre>";
-		$output = shell_exec('arping -c 3 '.$dstIP);
+		$output = shell_exec('/usr/sbin/arping -c 3 '.$dstMAC);
 		$rtn .= $output;
 		$rtn .= "</pre>";
 		return $rtn;
